@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/index.js",
   "bin": {
-    "pokemon-game-mcp": "./dist/index.js"
+    "pokemon-game-mcp": "dist/index.js"
   },
   "files": [
     "dist",
@@ -43,7 +43,7 @@
   "author": "Stratomai",
   "repository": {
     "type": "git",
-    "url": "https://github.com/DoubleN96/pokemon-game-mcp.git"
+    "url": "git+https://github.com/DoubleN96/pokemon-game-mcp.git"
   },
   "bugs": {
     "url": "https://github.com/DoubleN96/pokemon-game-mcp/issues"
