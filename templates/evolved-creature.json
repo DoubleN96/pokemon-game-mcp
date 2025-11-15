@@ -1,0 +1,28 @@
+{
+  "name": "MyCreatureEvolved",
+  "types": ["normal", "flying"],
+  "base_stats": {
+    "hp": 60,
+    "attack": 62,
+    "defense": 63,
+    "sp_attack": 80,
+    "sp_defense": 80,
+    "speed": 60
+  },
+  "catch_rate": 90,
+  "exp_yield": 142,
+  "description": "An evolved form with improved stats and dual typing.",
+  "moves": [
+    { "level": 1, "move_name": "Tackle" },
+    { "level": 1, "move_name": "Growl" },
+    { "level": 1, "move_name": "Quick Attack" },
+    { "level": 16, "move_name": "Wing Attack" },
+    { "level": 20, "move_name": "Take Down" },
+    { "level": 25, "move_name": "Agility" }
+  ],
+  "evolution": {
+    "method": "level",
+    "level": 36,
+    "into_name": "MyCreatureFinal"
+  }
+}

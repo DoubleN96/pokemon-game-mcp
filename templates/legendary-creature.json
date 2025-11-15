@@ -1,0 +1,25 @@
+{
+  "name": "MyLegendary",
+  "types": ["dragon", "psychic"],
+  "base_stats": {
+    "hp": 106,
+    "attack": 110,
+    "defense": 90,
+    "sp_attack": 154,
+    "sp_defense": 90,
+    "speed": 130
+  },
+  "catch_rate": 45,
+  "exp_yield": 220,
+  "description": "A powerful legendary creature with exceptional stats. Cannot be found in the wild easily.",
+  "moves": [
+    { "level": 1, "move_name": "Tackle" },
+    { "level": 1, "move_name": "Dragon Breath" },
+    { "level": 1, "move_name": "Confusion" },
+    { "level": 15, "move_name": "Dragon Claw" },
+    { "level": 20, "move_name": "Psychic" },
+    { "level": 25, "move_name": "Dragon Dance" },
+    { "level": 30, "move_name": "Hyper Beam" },
+    { "level": 35, "move_name": "Outrage" }
+  ]
+}

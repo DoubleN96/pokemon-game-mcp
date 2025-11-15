@@ -121,21 +121,48 @@ Implementa el sistema de captura de criaturas.
 ```
 
 #### `generate_creature_set`
-Genera un conjunto completo de criaturas temáticas con IA.
+Genera un conjunto completo de criaturas temáticas con IA usando Google Gemini.
 
 **Parámetros:**
-- `project_path`: Ruta al proyecto
-- `theme`: Tema para las criaturas
-- `count`: Número de criaturas a generar
-- `include_evolutions`: Incluir evoluciones
+- `project_path`: Ruta al proyecto de RPG Maker MZ
+- `theme`: Tema o concepto para las criaturas (ej: "Madrid culture", "Ocean creatures")
+- `count`: Número de criaturas a generar (default: 20)
+- `tier_distribution`: Distribución por tier (default: 50% tier1, 30% tier2, 20% tier3)
+- `starting_id`: ID inicial para las criaturas (default: auto-detect)
+- `generate_sprites`: Generar sprites con IA (experimental, default: false)
 
 **Ejemplo:**
 ```json
 {
   "project_path": "/path/to/game",
-  "theme": "Madrid culture and mythology",
+  "theme": "Madrid landmarks and culture: Puerta del Sol, Retiro Park, churros, chulapos",
   "count": 20,
-  "include_evolutions": true
+  "tier_distribution": {
+    "tier1": 0.5,
+    "tier2": 0.3,
+    "tier3": 0.2
+  },
+  "generate_sprites": false
+}
+```
+
+**Resultado:**
+```json
+{
+  "success": true,
+  "theme": "Madrid landmarks and culture...",
+  "creatures_created": 20,
+  "creatures_failed": 0,
+  "creatures": [
+    { "id": 1, "name": "Osín", "types": ["normal"], "tier": 1 },
+    { "id": 2, "name": "Churrito", "types": ["fire"], "tier": 1 },
+    ...
+  ],
+  "next_steps": [
+    "Review generated creatures in data/pokemon/creatures.json",
+    "Test creatures in RPG Maker MZ",
+    "Add sprite images to img/enemies/"
+  ]
 }
 ```
 
@@ -158,15 +185,69 @@ pokemon-game-mcp/
 
 ## 🎨 Ejemplo: Criaturas de Madrid
 
-Genera un juego completo basado en la cultura madrileña:
+Un ejemplo completo que genera 20 criaturas inspiradas en Madrid está disponible en `examples/madrid-creatures/`.
 
-```typescript
-// Ejemplo de criaturas generadas:
-- Chulapo (Normal/Fighting) - Basado en el chulapo madrileño
-- Gatoloco (Dark/Psychic) - Gato de Lavapiés
-- Ososol (Ground/Fire) - Oso y el Madroño
-- Retirón (Grass/Fairy) - Criatura del Retiro
+### Ejecutar el ejemplo
+
+```bash
+# 1. Asegúrate de tener tu proyecto de RPG Maker MZ listo
+# 2. Configura tu API key de Gemini
+export GEMINI_API_KEY=tu_api_key_aqui
+
+# 3. Ejecuta el generador
+cd examples/madrid-creatures
+node generate.mjs /path/to/rpgmaker/project
 ```
+
+### Criaturas generadas
+
+El ejemplo genera criaturas basadas en:
+
+**Tier 1 - Básicas (10 criaturas)**
+- 🐻 Osín - El osito de la Puerta del Sol
+- 🥖 Churrito - Inspirado en churros madrileños
+- 🎭 Chulapín - Basado en los chulapos
+- 🌳 Retirito - Criatura del Parque del Retiro
+- Y más...
+
+**Tier 2 - Evolucionadas (6 criaturas)**
+- 🏰 Alcalón - Evolución inspirada en la Puerta de Alcalá
+- 🍲 Cocidón - Versión poderosa del Cocido Madrileño
+- 🦁 Cibeleón - Evolución de la Fuente de Cibeles
+
+**Tier 3 - Legendarias (4 criaturas)**
+- 👑 Palareal - El Palacio Real transformado
+- ⚡ Granvión - Poder de la Gran Vía
+- 🌊 Manzanares - Espíritu del río
+- 🎨 Pradolux - Energía del Museo del Prado
+
+Ver documentación completa en [`examples/madrid-creatures/README.md`](examples/madrid-creatures/README.md)
+
+## 📋 Templates
+
+El proyecto incluye templates JSON para crear criaturas manualmente sin usar IA:
+
+- **`templates/basic-creature.json`** - Tier 1 (Base Stat Total ~318)
+- **`templates/evolved-creature.json`** - Tier 2 (Base Stat Total ~405)
+- **`templates/legendary-creature.json`** - Tier 3 (Base Stat Total ~680)
+
+### Uso de templates
+
+```javascript
+import basicCreature from './templates/basic-creature.json' assert { type: 'json' };
+
+// Personaliza
+basicCreature.name = "MiCriatura";
+basicCreature.types = ["fire", "flying"];
+
+// Crea la criatura
+await createCreatureTool.execute({
+  project_path: "/path/to/project",
+  creature_data: basicCreature
+});
+```
+
+Ver documentación completa en [`templates/README.md`](templates/README.md)
 
 ## 🔧 Desarrollo
 

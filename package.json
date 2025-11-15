@@ -1,16 +1,24 @@
 {
   "name": "pokemon-game-mcp",
   "version": "1.0.0",
-  "description": "MCP Server for creating Pokémon-style games in RPG Maker MZ",
+  "description": "MCP Server for creating Pokémon-style games in RPG Maker MZ with AI-powered creature generation",
   "type": "module",
   "main": "dist/index.js",
   "bin": {
     "pokemon-game-mcp": "./dist/index.js"
   },
+  "files": [
+    "dist",
+    "templates",
+    "examples",
+    "README.md",
+    "LICENSE"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
     "start": "node dist/index.js",
+    "prepublishOnly": "npm run build",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
@@ -22,12 +30,25 @@
   },
   "keywords": [
     "mcp",
+    "model-context-protocol",
     "pokemon",
     "rpg-maker",
+    "rpg-maker-mz",
     "game-development",
-    "ai"
+    "ai",
+    "gemini",
+    "creature-generation",
+    "pokemon-essentials"
   ],
   "author": "Stratomai",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/DoubleN96/pokemon-game-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/DoubleN96/pokemon-game-mcp/issues"
+  },
+  "homepage": "https://github.com/DoubleN96/pokemon-game-mcp#readme",
   "license": "MIT",
   "dependencies": {
     "@modelcontextprotocol/sdk": "^0.5.0",
