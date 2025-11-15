@@ -9,6 +9,7 @@ MCP (Model Context Protocol) Server para crear juegos estilo Pokémon en RPG Mak
 - **Sistema de Combate**: Tipos, ventajas/desventajas, movimientos y estrategia
 - **Evoluciones**: Sistema completo de evolución de criaturas
 - **Integración con RPG Maker MZ**: Exporta directamente a proyectos de RPG Maker MZ
+- **Compatibilidad con Plugins**: Genera datos compatibles con Monster Capture System (Synrec) y Pokemon Mechanics (SumRndmDde)
 - **Adaptador de Pokémon Essentials**: Importa datos y mecánicas de Pokémon Essentials
 
 ## 🚀 Instalación
@@ -166,6 +167,50 @@ Genera un conjunto completo de criaturas temáticas con IA usando Google Gemini.
 }
 ```
 
+## 🔌 Integración con Plugins de RPG Maker MZ
+
+Este MCP server genera datos **100% compatibles** con los plugins más populares de Pokémon para RPG Maker MZ:
+
+### Monster Capture System (Synrec)
+Los Pokémon generados incluyen:
+- ✅ **catch_rate** compatible con `Synrec_MC_Core` (fórmula Gen 1-5)
+- ✅ **evolution** configurado para `Synrec_MC_Evolution`
+- ✅ **gender_traits** para `Synrec_MC_GenderTraits`
+- ✅ Registro automático en `Synrec_MC_Beastiary` (Pokédex)
+
+### Pokemon Mechanics (SumRndmDde)
+- ✅ **Tipos** mapeados a Elements de RPG Maker MZ para `SRD_PokemonTypeSystem`
+- ✅ **Movimientos** limitados a 4 máximo (`SRD_Pokemon4MovesOnly`)
+- ✅ **Naturalezas** compatibles con `SRD_Natures`
+- ✅ **Dual-type** soportado por `SRD_PokemonTypeDisplay`
+
+### Fórmula de Captura Implementada
+
+```javascript
+((3 * HP_MAX - 2 * HP_ACTUAL) * CATCH_RATE * BALL_BONUS) / (3 * HP_MAX)
+```
+
+**Catch Rates generados por el MCP:**
+- Pokémon comunes: `255` (muy fácil de capturar)
+- Pokémon raros/evolucionados: `45` (difícil)
+- Legendarios: `3` (extremadamente difícil)
+
+### Mapeo de Tipos → Elements
+
+| Tipo Pokémon | RPG Maker Element | ID |
+|--------------|-------------------|-----|
+| Normal | Physical | 1 |
+| Fuego | Fire | 2 |
+| Hielo | Ice | 3 |
+| Eléctrico | Thunder | 4 |
+| Agua | Water | 5 |
+| Tierra | Earth | 6 |
+| Volador | Wind | 7 |
+| Psíquico | Light | 8 |
+| Siniestro | Dark | 9 |
+
+**Ver documentación completa de plugins en:** [pokemon-madrid-game/docs/PLUGINS_GUIDE.md](https://github.com/DoubleN96/pokemon-madrid-game/blob/main/docs/PLUGINS_GUIDE.md)
+
 ## 🏗️ Arquitectura
 
 ```
@@ -304,6 +349,9 @@ MIT License - ver [LICENSE](LICENSE) para más detalles
 
 - Basado en [rpgmaker-mz-mcp](https://github.com/ShunsukeHayashi/rpgmaker-mz-mcp)
 - Mecánicas inspiradas en [Pokémon Essentials](https://github.com/Maruno17/pokemon-essentials)
+- Plugins compatibles:
+  - [Monster Capture System](https://github.com/Synrec/RPG-Maker-MZ-Monster-Capture) por Synrec
+  - [Pokemon Mechanics](https://sumrndm.site/category/plugins/pokemon-plugins/) por SumRndmDde
 - Desarrollado con [Model Context Protocol](https://modelcontextprotocol.io)
 
 ## 🔗 Enlaces
