@@ -7,10 +7,7 @@ import {
   ListToolsRequestSchema,
 } from '@modelcontextprotocol/sdk/types.js';
 import { logger } from './utils/logger.js';
-
-// TODO: Importar herramientas cuando las implementemos
-// import { tools as pokemonTools } from './tools/pokemon/index.js';
-// import { tools as rpgmakerTools } from './tools/rpgmaker/index.js';
+import { pokemonTools } from './tools/pokemon/index.js';
 
 /**
  * Pokémon Game MCP Server
@@ -93,8 +90,12 @@ class PokemonGameMCPServer {
   }
 
   private registerTools() {
-    // TODO: Registrar herramientas aquí cuando las implementemos
-    // Por ahora, registramos una herramienta de prueba
+    // Registrar herramientas de Pokémon
+    for (const tool of pokemonTools) {
+      this.registerTool(tool);
+    }
+
+    // Herramienta de prueba
     this.registerTool({
       name: 'test',
       description: 'Test tool to verify MCP server is working',
@@ -114,6 +115,7 @@ class PokemonGameMCPServer {
           success: true,
           message: `Echo: ${message}`,
           server: 'pokemon-game-mcp v1.0.0',
+          available_tools: Array.from(this.tools.keys()).filter((name) => name !== 'test'),
         };
       },
     });
@@ -141,7 +143,7 @@ interface Tool {
   name: string;
   description: string;
   inputSchema: {
-    type: 'object';
+    type: string;
     properties: Record<string, unknown>;
     required?: string[];
   };
